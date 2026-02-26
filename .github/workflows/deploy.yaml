@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Azure-Infra/Loadbalancer
+        working-directory: Azure-Infra/AppGateway
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4

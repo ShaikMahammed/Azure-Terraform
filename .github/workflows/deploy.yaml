@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Azure-Infra/Networksecurity-Group
+        working-directory: Azure-Infra/Vm
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4

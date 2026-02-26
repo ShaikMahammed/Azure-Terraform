@@ -1,0 +1,11 @@
+vnet_name = "Dev-vnet"
+address_space = [ "10.0.0.0/16" ]
+location = "Korea Central"
+rg_name = "Dev-rg"
+subnet_name = "web-subnet"
+subnet_prefix = [ "10.0.1.0/24" ]
+nsg_name = "Dev-nsg-Allow"
+vm_publicip_name = "Public-IP"
+nic_name = "Vm-Nic"
+vm_name = "WebVM"
+vm_size = "Standard_B2s_v2"

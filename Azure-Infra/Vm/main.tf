@@ -73,7 +73,6 @@ resource "azurerm_linux_virtual_machine" "Vm01" {
   network_interface_ids = [ azurerm_network_interface.nic.id ]
 
   os_disk {
-    name = "${var.vm_name}-osdisk"
     caching = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }

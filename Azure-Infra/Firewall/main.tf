@@ -123,3 +123,56 @@ resource "azurerm_firewall_nat_rule_collection" "dnat_ssh" {
     protocols             = ["TCP"]
   }
 }
+
+#Application rule needs a DNS  to resolve DNS names
+# ----------------------------------------------------------------------------------
+# DNS RESOLUTION RULE: Required for Application Rules to function.
+# Before the Firewall can filter by domain name (FQDN), the client VM must be able 
+# to resolve those names into IP addresses. This rule allows DNS traffic to 
+# Google (8.8.8.8) and Cloudflare (1.1.1.1).
+# ----------------------------------------------------------------------------------
+
+resource "azurerm_firewall_network_rule_collection" "allow_dns" {
+  name = "Allow-DNS"
+  resource_group_name = data.azurerm_resource_group.rg1.name
+  azure_firewall_name = azurerm_firewall.firewall.name
+  priority = 156
+  action = "Allow"
+  rule {
+    name = "Allow-DNS"
+    source_addresses = ["10.0.1.0/24"]
+    destination_addresses = ["8.8.8.8","1.1.1.1"]
+    destination_ports = ["53"]
+    protocols = ["UDP"]
+  }
+}
+
+#Now Adding an Application rule
+# ----------------------------------------------------------------------------------
+# APPLICATION RULE: Layer 7 (FQDN) Filtering.
+# This restricts the VM to ONLY accessing specific, approved domains. 
+# Unlike Network Rules, this inspects the "Host Header" of the traffic.
+# ----------------------------------------------------------------------------------
+
+resource "azurerm_firewall_application_rule_collection" "allow_specific_websites" {
+  name = "allow-google-github"
+  resource_group_name = data.azurerm_resource_group.rg1.name
+  azure_firewall_name = azurerm_firewall.firewall.name
+  action = "Allow"
+  priority = 123
+  rule {
+    name = "Allow-websites"
+    source_addresses = ["10.0.1.0/24"]
+    protocol {
+      type = "Http"
+      port = 80
+    }
+    protocol {
+      type = "Https"
+      port = 443
+    }
+
+    target_fqdns = ["github.com","google.com","www.google.com","www.github.com"]
+    
+      }
+}

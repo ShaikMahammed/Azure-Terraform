@@ -1,0 +1,21 @@
+  # Ignore Terraform local state files
+*.tfstate
+*.tfstate.*
+
+# Ignore Terraform cache and provider binaries
+.terraform/
+
+# Ignore Terraform crash logs
+crash.log
+
+# Optional: ignore lock file if you don’t want it in repo
+# You can comment this if you want to keep it for CI/CD
+# .terraform.lock.hcl
+
+# Ignore IDE/editor files
+*.swp
+*.vscode/
+*.idea/
+
+# Keep your .tfvars files so dev.tfvars / prod.tfvars are tracked
+!*.tfvars

@@ -1,0 +1,9 @@
+vnet_name = "Dev-vnet"
+location = "Korea Central"
+rg_name = "Dev-rg"
+Firewall_subnet_name = "AzureFirewallSubnet"
+subnet_prefix = [ "10.0.5.0/26" ]
+firewall_name = "Firewall-01"
+firewall_public_ip_name = "Firewall-PublicIp"
+route_table_name = "Firewall-UDR"
+vm_subnet_name = "web-subnet"

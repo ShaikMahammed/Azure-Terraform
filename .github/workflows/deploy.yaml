@@ -11,7 +11,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Azure-Infra/AppGateway
+        working-directory: Azure-Infra/Firewall
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
